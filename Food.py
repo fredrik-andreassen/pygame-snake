@@ -10,8 +10,13 @@ class Food:
         self.radius = radius
         self.color = color
 
-        self.pos_x = random.randrange(target_snake.step, surface.get_width(), target_snake.step)
-        self.pos_y = random.randrange(target_snake.step, surface.get_height(), target_snake.step)
+        available_positions = []
+        for x in range(0, surface.get_width(), target_snake.step):
+            for y in range(0, surface.get_height(), target_snake.step):
+                if not (x, y) in target_snake.get_current_placement():
+                    available_positions.append((x, y))
+
+        self.pos_x, self.pos_y = random.choice(available_positions)
 
         self.points = 1
     

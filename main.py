@@ -68,7 +68,9 @@ def main():
             show_message(display, 'GAME OVER', red, (display_width/2, display_height/2))
             pygame.display.update()
             time.sleep(3)
+
             snake.reset()
+            available_food = [Food(display, snake)]
             score = 0
 
         for food in available_food:
