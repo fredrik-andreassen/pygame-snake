@@ -69,6 +69,15 @@ class Snake:
         elif self.current_direction == 'none':
             return
         
+        if self.pos_y < 0:
+            self.pos_y = self.surface.get_height()
+        elif self.pos_y > self.surface.get_height():
+            self.pos_y = 0
+        elif self.pos_x < 0:
+            self.pos_x = self.surface.get_width()
+        elif self.pos_x > self.surface.get_width():
+            self.pos_x = 0
+        
         if (self.pos_x, self.pos_y) in self.pos_log[-self.len:]:
             raise CollisionException()
 
