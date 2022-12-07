@@ -3,16 +3,20 @@ import pygame, sys, time, random
 from Snake import Snake, CollisionException
 from Food import Food
 
-display_height = 600
-display_width = 900
+display_height = 720
+display_width = 1280
 
 framerate = 60
 
 red = (255, 0, 0)
 green = (0, 255, 00)
 blue = (0, 0, 255)
+
 black = (0, 0, 0)
 white = (255, 255, 255)
+
+yellow = (255, 255, 0)
+orange = (255, 130, 0)
 
 
 def show_message(display: pygame.Surface, message: str, color: tuple[int, int, int], position: tuple[int, int], size: int = 50):
