@@ -1,13 +1,13 @@
-import pygame, random
+import pygame, random, math
 
 from Snake import Snake
 
 
 class Food:
-    def __init__(self, surface: pygame.Surface, target_snake: Snake, radius: int = 7, color: tuple[int, int, int] = (0, 255, 0)) -> None:
+    def __init__(self, surface: pygame.Surface, target_snake: Snake, color: tuple[int, int, int] = (0, 255, 0)) -> None:
         self.surface = surface
         self.target_snake = target_snake
-        self.radius = radius
+        self.radius = target_snake.radius - 2
         self.color = color
 
         available_positions = []
@@ -25,5 +25,6 @@ class Food:
         return (self.pos_x, self.pos_y)
     
 
-    def draw(self) -> None:
-        pygame.draw.circle(self.surface, self.color, self.get_pos(), self.radius)
+    def draw(self, frame_nr: int=1) -> None:
+        r = self.radius + (math.sin(frame_nr / 20) * 1.5)
+        pygame.draw.circle(self.surface, self.color, self.get_pos(), r)

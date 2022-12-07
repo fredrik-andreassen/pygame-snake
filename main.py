@@ -36,8 +36,11 @@ def main():
     available_food = [Food(display, snake)]
 
     score = 0
+    frame_nr = 0
 
-    while True:            
+    while True:
+        frame_nr += 1
+
         for event in pygame.event.get():
 
             if event.type == pygame.QUIT:
@@ -58,7 +61,7 @@ def main():
         display.fill(black)
 
         for food in available_food:
-            food.draw()
+            food.draw(frame_nr=frame_nr)
 
         try:
             snake.move()
