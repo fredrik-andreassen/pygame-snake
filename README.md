@@ -11,4 +11,4 @@ Standard vindusstørrelse: `python main.py`
 Egendefinert vindusstørrelse: `python main.py 1920 1080`
 
 ### Kontroller
-Endre retning: <kbd>←</kbd> / <kbd>→</kbd> / <kbd>↑</kbd> / <kbd>↓</kbd>
+Endre retning: <kbd>←</kbd> / <kbd>→</kbd> / <kbd>↑</kbd> / <kbd>↓</kbd> eller <kbd>W</kbd> / <kbd>A</kbd> / <kbd>S</kbd> / <kbd>D</kbd>
