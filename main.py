@@ -6,7 +6,7 @@ from Food import Food
 display_height = 720
 display_width = 1280
 
-framerate = 60
+framerate = 200
 
 red = (255, 0, 0)
 green = (0, 255, 00)
@@ -32,7 +32,7 @@ def main():
     pygame.display.set_caption('pygame-snake')
     clock = pygame.time.Clock()
 
-    snake = Snake(display, speed=2, radius=10)
+    snake = Snake(display, speed=1, radius=10)
     available_food = [Food(display, snake)]
 
     score = 0
@@ -67,6 +67,7 @@ def main():
             snake.move()
             snake.draw()
         except CollisionException:
+            print(f'GAME OVER! Score: {score}')
             snake.draw()
             show_message(display, 'GAME OVER', red, (display_width/2, display_height/2))
             pygame.display.update()
