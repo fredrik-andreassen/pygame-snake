@@ -6,7 +6,9 @@
 - [`pygame`](https://www.pygame.org/wiki/GettingStarted)
 
 ### Kjør spillet
-`python main.py`
+Standard vindusstørrelse: `python main.py`
+
+Egendefinert vindusstørrelse: `python main.py 1920 1080`
 
 ### Kontroller
-Bare piltastene
+Endre retning: <kbd>←</kbd> / <kbd>→</kbd> / <kbd>↑</kbd> / <kbd>↓</kbd>

@@ -3,8 +3,12 @@ import pygame, sys, time
 from Snake import Snake, CollisionException
 from Food import Food
 
-display_height = 720
-display_width = 1280
+if len(sys.argv) == 3:
+    display_width = int(sys.argv[1])
+    display_height = int(sys.argv[2])
+else:
+    display_height = 720
+    display_width = 1280
 
 framerate = 200
 
