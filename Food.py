@@ -12,6 +12,8 @@ class Food:
 
         self.pos_x = random.randrange(target_snake.step, surface.get_width(), target_snake.step)
         self.pos_y = random.randrange(target_snake.step, surface.get_height(), target_snake.step)
+
+        self.points = 1
     
 
     def get_pos(self) -> tuple[int, int]:

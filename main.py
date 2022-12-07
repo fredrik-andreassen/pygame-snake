@@ -29,7 +29,7 @@ def main():
     clock = pygame.time.Clock()
 
     snake = Snake(display, speed=2)
-    food = Food(display, snake)
+    available_food = [Food(display, snake)]
 
     score = 0
 
@@ -37,6 +37,7 @@ def main():
         for event in pygame.event.get():
 
             if event.type == pygame.QUIT:
+                print('QUIT event triggered')
                 pygame.quit()
                 sys.exit(0)
             
@@ -51,7 +52,9 @@ def main():
                     snake.request_direction('down')
 
         display.fill(black)
-        food.draw()
+
+        for food in available_food:
+            food.draw()
 
         try:
             snake.move()
@@ -62,14 +65,18 @@ def main():
             pygame.display.update()
             time.sleep(3)
             snake.reset()
-       
-        if snake.get_pos() == food.get_pos():
-            print(f'Consumed food at {food.get_pos()}')
-            score += 1
-            snake.grow()
+            score = 0
 
-            food = Food(display, snake)
-            print(f'Food placed at {food.get_pos()}')
+        for food in available_food:
+            if snake.get_pos() == food.get_pos():
+                score += food.points
+                snake.grow()
+                print(f'Consumed food at {food.get_pos()}')
+                available_food.remove(food)
+
+                new_food = Food(display, snake)
+                available_food.append(new_food)
+                print(f'Food placed at {new_food.get_pos()}')
         
         show_message(display, f'Score: {score}', (150, 150, 150), (5, 5), size=30)
 
