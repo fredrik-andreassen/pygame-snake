@@ -25,11 +25,19 @@ class Snake:
         self.current_direction = 'none'
 
         self.pos_log = [(self.pos_x, self.pos_y)]
-        self.len = self.step
+        self.allowed_len = self.step
+        self.current_len = 1
     
 
     def get_pos(self) -> tuple[int, int]:
         return (self.pos_x, self.pos_y)
+    
+
+    def get_current_visual_placement(self) -> list[tuple[int, int]]:
+        return self.pos_log[-int(self.current_len):]
+    
+    def get_current_placement(self) -> list[tuple[int, int]]:
+        return self.pos_log[-int(self.current_len)-1:]
     
 
     def request_direction(self, direction: str) -> None:
@@ -78,16 +86,22 @@ class Snake:
         elif self.pos_x > self.surface.get_width():
             self.pos_x = 0
         
-        if (self.pos_x, self.pos_y) in self.pos_log[-self.len:]:
+        if self.current_len < self.allowed_len:
+            if self.allowed_len == self.step:
+                self.current_len += self.speed
+            else:
+                self.current_len += 0.05 * self.speed
+        
+        if (self.pos_x, self.pos_y) in self.get_current_placement():
             raise CollisionException()
 
         self.pos_log.append((self.pos_x, self.pos_y))
     
 
     def grow(self) -> None:
-        self.len += self.step
+        self.allowed_len += self.step
         
 
     def draw(self) -> None:
-        for x, y in self.pos_log[-self.len:]:
+        for x, y in self.get_current_visual_placement():
             pygame.draw.circle(self.surface, self.color, (x, y), self.radius)

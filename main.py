@@ -28,7 +28,7 @@ def main():
     pygame.display.set_caption('pygame-snake')
     clock = pygame.time.Clock()
 
-    snake = Snake(display, speed=2)
+    snake = Snake(display, speed=2, radius=10)
     available_food = [Food(display, snake)]
 
     score = 0
