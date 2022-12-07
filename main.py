@@ -1,4 +1,4 @@
-import pygame, sys, time, random
+import pygame, sys, time
 
 from Snake import Snake, CollisionException
 from Food import Food
