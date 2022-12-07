@@ -14,10 +14,10 @@ class Snake:
 
         self.step = (self.radius * 2) + 2
 
-        self.reset_pos()
+        self.reset()
 
 
-    def reset_pos(self) -> None:
+    def reset(self) -> None:
         self.pos_x = int(self.surface.get_width() / self.step / 2) * self.step
         self.pos_y = int(self.surface.get_height() / self.step / 2) * self.step
 

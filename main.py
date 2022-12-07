@@ -30,8 +30,8 @@ def main():
 
     snake = Snake(display, speed=2)
     food = Food(display, snake)
-    score = 0
 
+    score = 0
 
     while True:            
         for event in pygame.event.get():
@@ -61,7 +61,7 @@ def main():
             show_message(display, 'GAME OVER', red, (display_width/2, display_height/2))
             pygame.display.update()
             time.sleep(3)
-            snake.reset_pos()
+            snake.reset()
        
         if snake.get_pos() == food.get_pos():
             print(f'Consumed food at {food.get_pos()}')
@@ -71,7 +71,7 @@ def main():
             food = Food(display, snake)
             print(f'Food placed at {food.get_pos()}')
         
-        show_message(display, f'Score:{score}', (150,150,150), (5,5), size=30)
+        show_message(display, f'Score: {score}', (150, 150, 150), (5, 5), size=30)
 
         pygame.display.update()
 
