@@ -25,13 +25,13 @@ class Board:
 
     def assess_food(self) -> None:
         if len(self.available_food) < len(self.snakes) + 1:
-            if random.random() < 0.001:
+            if random.random() < 0.01:
                 self.place_food()
     
 
     def add_snake(self, key_mapping: dict):
         id = len(self.snakes) + 1
-        self.snakes.append(Snake(self, id, key_mapping))
+        self.snakes.append(Snake(self, id, key_mapping, 'blue'))
     
 
     def pass_event(self, event):

@@ -6,15 +6,38 @@ class CollisionException(Exception):
 
 
 class Snake:
-    def __init__(self, board, id: int, key_mapping: dict, color: tuple[int, int, int] = (255, 255, 255)) -> None:
+    def __init__(self, board, id: int, key_mapping: dict, color: str = '') -> None:
         self.board = board
         self.id = id
         self.key_mapping = key_mapping
-        self.color = color
 
         self.radius = board.step / 2
 
+        self.generate_color_pattern(color)
+
         self.reset()
+    
+
+    def generate_color_pattern(self, color: str = ''):
+        darkest, brightest = 80, 190
+        color_pattern = [(i, i, i) for i in range(darkest, brightest)]
+        
+        if color:
+            if color == 'red':
+                color_pattern = [(255, i, i) for i in range(darkest, brightest)]
+            if color == 'green':
+                color_pattern = [(i, 255, i) for i in range(darkest, brightest)]
+            if color == 'blue':
+                color_pattern = [(i, i, 255) for i in range(darkest, brightest)]
+            if color == 'yellow':
+                color_pattern = [(255, 255, i) for i in range(darkest, brightest)]
+            if color == 'purple':
+                color_pattern = [(255, i, 255) for i in range(darkest, brightest)]
+
+        self.color_pattern = color_pattern + list(reversed(color_pattern))
+        print(self.color_pattern)
+        self.color_pattern_len = len(self.color_pattern)
+
 
 
     def reset(self) -> None:
@@ -123,5 +146,6 @@ class Snake:
         
 
     def draw(self) -> None:
-        for x, y in self.get_current_visual_placement():
-            pygame.draw.circle(self.board.surface, self.color, (x, y), self.radius)
+        for i, (x, y) in enumerate(self.get_current_visual_placement()):
+            color = self.color_pattern[i % self.color_pattern_len]
+            pygame.draw.circle(self.board.surface, color, (x, y), self.radius)
