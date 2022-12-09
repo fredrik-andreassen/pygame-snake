@@ -34,6 +34,7 @@ def main():
         frame_nr += 1
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                print(f'[{frame_nr}] QUIT event triggered')
                 pygame.quit()
                 sys.exit(0)
             
