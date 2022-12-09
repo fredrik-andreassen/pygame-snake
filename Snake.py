@@ -108,7 +108,7 @@ class Snake:
             if self.allowed_len == self.board.step:
                 self.current_len += self.board.speed
             else:
-                self.current_len += 0.05 * self.speed
+                self.current_len += 0.05 * self.board.speed
         
         for snake in self.board.snakes:
             if snake.id != self.id:
@@ -119,7 +119,7 @@ class Snake:
 
 
     def grow(self) -> None:
-        self.allowed_len += self.step
+        self.allowed_len += self.board.step
         
 
     def draw(self) -> None:
