@@ -53,5 +53,6 @@ def main():
         pygame.display.update()
         clock.tick(FRAMERATE)
 
+
 if __name__ == '__main__':
     main()
