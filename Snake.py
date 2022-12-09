@@ -56,6 +56,8 @@ class Snake:
     def request_direction(self, direction: str) -> None:
         if direction not in ['up', 'down', 'right', 'left', 'none']:
             raise ValueError(f'snake {self.id} got unexpected direction {direction}')
+        
+        print(f'Snake {self.id} received request {direction}')
 
         if direction == self.current_direction:
             return
@@ -76,8 +78,9 @@ class Snake:
     
 
     def move(self) -> None:
-        if self.can_change_direction():
+        if self.can_change_direction() and self.current_direction != self.requested_direction:
             self.current_direction = self.requested_direction
+            print(f'Snake {self.id} changed direction {self.current_direction}')
         
         if self.current_direction == 'up':
             self.pos_y -= self.board.speed
