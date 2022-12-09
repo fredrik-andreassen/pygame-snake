@@ -27,7 +27,10 @@ def main():
     clock = pygame.time.Clock()
 
     board = Board(main_surface, STEP)
-    board.add_snake({pygame.K_UP: 'up', pygame.K_DOWN: 'down', pygame.K_RIGHT: 'right', pygame.K_LEFT: 'left'})
+    board.add_snake({pygame.K_UP: 'up', pygame.K_DOWN: 'down', pygame.K_RIGHT: 'right', pygame.K_LEFT: 'left'},
+                    'blue', (STEP * 10, int(HEIGHT / 2)))
+    board.add_snake({pygame.K_w: 'up', pygame.K_s: 'down', pygame.K_d: 'right', pygame.K_a: 'left'},
+                    'red', (WIDTH - (STEP * 10), int(HEIGHT / 2)))
 
     frame_nr = 0
     while True:

@@ -6,10 +6,11 @@ class CollisionException(Exception):
 
 
 class Snake:
-    def __init__(self, board, id: int, key_mapping: dict, color: str = '') -> None:
+    def __init__(self, board, id: int, key_mapping: dict, color: str, init_pos: tuple[int, int]) -> None:
         self.board = board
         self.id = id
         self.key_mapping = key_mapping
+        self.init_pos_x, self.init_pos_y = init_pos
 
         self.radius = board.step / 2
 
@@ -45,8 +46,8 @@ class Snake:
         self.generate_color_pattern('gray')
 
     def reset(self) -> None:
-        self.pos_x = int(self.board.surface.get_width() / self.board.step / 2) * self.board.step
-        self.pos_y = int(self.board.surface.get_height() / self.board.step / 2) * self.board.step
+        self.pos_x = self.init_pos_x
+        self.pos_y = self.init_pos_y
 
         self.requested_direction = 'none'
         self.current_direction = 'none'
@@ -76,15 +77,8 @@ class Snake:
     
 
     def pass_event(self, event) -> None:
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_LEFT or event.key == pygame.K_a:
-                self.request_direction('left')
-            elif event.key == pygame.K_RIGHT or event.key == pygame.K_d:
-                self.request_direction('right')
-            elif event.key == pygame.K_UP or event.key == pygame.K_w:
-                self.request_direction('up')
-            elif event.key == pygame.K_DOWN or event.key == pygame.K_s:
-                self.request_direction('down')
+        if event.type == pygame.KEYDOWN and event.key in self.key_mapping:
+            self.request_direction(self.key_mapping[event.key])
 
     
     def request_direction(self, direction: str) -> None:
@@ -144,11 +138,6 @@ class Snake:
                 self.current_len += self.board.speed
             else:
                 self.current_len += 0.05 * self.board.speed
-        
-        for snake in self.board.snakes:
-            if snake.id != self.id:
-                if (self.pos_x, self.pos_y) in snake.get_current_placement():
-                    raise CollisionException()
 
         self.pos_log.append((self.pos_x, self.pos_y))
 
