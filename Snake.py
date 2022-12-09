@@ -27,6 +27,8 @@ class Snake:
         self.pos_log = [(self.pos_x, self.pos_y)]
         self.allowed_len = self.board.step
         self.current_len = 1
+
+        self.score = 0
     
 
     def get_pos(self) -> tuple[int, int]:
