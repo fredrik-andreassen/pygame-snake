@@ -29,7 +29,9 @@ def main():
     board = Board(main_surface, STEP)
     board.add_snake({pygame.K_UP: 'up', pygame.K_DOWN: 'down', pygame.K_RIGHT: 'right', pygame.K_LEFT: 'left'})
 
+    frame_nr = 0
     while True:
+        frame_nr += 1
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -42,7 +44,7 @@ def main():
         board.update()
         
         main_surface.fill((0, 0, 0))
-        board.draw()
+        board.draw(frame_nr)
 
         if MODE == 'debug':
             for x in range(STEP, WIDTH, STEP):
