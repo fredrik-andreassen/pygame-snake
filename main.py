@@ -8,7 +8,7 @@ WIDTH = 1280
 HEIGHT = 720
 FRAMERATE = 200
 
-STEP = 10
+STEP = 20
 
 def main():
     pygame.init()
@@ -17,7 +17,7 @@ def main():
     pygame.display.set_caption('pygame-snake')
     clock = pygame.time.Clock()
 
-    board = Board(main_surface, 10)
+    board = Board(main_surface, STEP)
     board.add_snake({pygame.K_UP: 'up', pygame.K_DOWN: 'down', pygame.K_RIGHT: 'right', pygame.K_LEFT: 'left'})
 
     while True:
