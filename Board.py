@@ -20,7 +20,14 @@ class Board:
             pos_x = random.randrange(self.step, self.surface.get_width(), self.step)
             pos_y = random.randrange(self.step, self.surface.get_height(), self.step)
 
+            attempts = 1
+            while (pos_x, pos_y) in [food.get_pos() for food in self.available_food] or (pos_x, pos_y) in [snake.get_pos() for snake in self.snakes]:
+                pos_x = random.randrange(self.step, self.surface.get_width(), self.step)
+                pos_y = random.randrange(self.step, self.surface.get_height(), self.step)
+                attempts += 1
+
         self.available_food.append(Food(self, pos_x, pos_y, (self.step / 2) - 1))
+        print(f'Placed food at ({pos_x}, {pos_y}) in {attempts} attempts')
 
 
     def assess_food(self) -> None:
