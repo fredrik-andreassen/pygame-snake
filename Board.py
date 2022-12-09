@@ -25,7 +25,7 @@ class Board:
 
     def assess_food(self) -> None:
         if len(self.available_food) < len(self.snakes) + 1:
-            if random.random() < 0.01:
+            if random.random() < 0.001:
                 self.place_food()
     
 
