@@ -41,10 +41,16 @@ class Snake:
         return self.pos_log[-int(self.current_len)-1:]
     
 
-    def pass_event_type(self, event_type) -> None:
-        if event_type in self.key_mapping:
-            print(f'snake {self.id} got valid event')
-            self.request_direction(self.key_mapping[event_type])
+    def pass_event(self, event) -> None:
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_LEFT or event.key == pygame.K_a:
+                self.request_direction('left')
+            elif event.key == pygame.K_RIGHT or event.key == pygame.K_d:
+                self.request_direction('right')
+            elif event.key == pygame.K_UP or event.key == pygame.K_w:
+                self.request_direction('up')
+            elif event.key == pygame.K_DOWN or event.key == pygame.K_s:
+                self.request_direction('down')
 
     
     def request_direction(self, direction: str) -> None:
@@ -94,8 +100,8 @@ class Snake:
             self.pos_x = 0
         
         if self.current_len < self.allowed_len:
-            if self.allowed_len == self.step:
-                self.current_len += self.speed
+            if self.allowed_len == self.board.step:
+                self.current_len += self.board.speed
             else:
                 self.current_len += 0.05 * self.speed
         

@@ -27,10 +27,10 @@ def main():
                 sys.exit(0)
             
             if event.type == pygame.KEYDOWN:
-                print(event.key.name)
+                board.pass_event(event)
             
         
-            # board.update(event.key)
+        board.update(event)
         
         main_surface.fill((0, 0, 0))
         board.draw()

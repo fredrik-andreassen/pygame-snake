@@ -15,12 +15,16 @@ class Board:
     def add_snake(self, key_mapping: dict):
         id = len(self.snakes) + 1
         self.snakes.append(Snake(self, id, key_mapping))
+    
+
+    def pass_event(self, event):
+        for snake in self.snakes:
+            snake.pass_event(event)
 
 
-    def update(self, event_type):
+    def update(self, event):
         '''Oppdaterer alle entiteter på brettet'''
         for snake in self.snakes:
-            snake.pass_event_type(event_type)
             snake.move()
 
 
