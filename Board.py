@@ -20,7 +20,7 @@ class Board:
             pos_x = random.randrange(self.step, self.surface.get_width(), self.step)
             pos_y = random.randrange(self.step, self.surface.get_height(), self.step)
 
-        self.available_food.append(Food(self, pos_x, pos_y, self.step - 1))
+        self.available_food.append(Food(self, pos_x, pos_y, (self.step / 2) - 1))
 
 
     def assess_food(self) -> None:
@@ -49,6 +49,8 @@ class Board:
                     snake.score += food.points
                     self.available_food.remove(food)
                     snake.grow()
+        
+        self.assess_food()
 
 
     def draw(self, frame_nr=1):
