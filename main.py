@@ -39,7 +39,7 @@ def main():
                 board.pass_event(event)
             
         
-        board.update(event)
+        board.update()
         
         main_surface.fill((0, 0, 0))
         board.draw()
