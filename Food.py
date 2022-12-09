@@ -17,4 +17,4 @@ class Food:
 
     def draw(self, frame_nr: int=1) -> None:
         r = self.radius + (math.sin(frame_nr / 30) * 1.5)
-        pygame.draw.circle(self.baord.surface, self.color, self.get_pos(), r)
+        pygame.draw.circle(self.board.surface, self.color, self.get_pos(), r)
