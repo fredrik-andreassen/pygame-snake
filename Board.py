@@ -1,6 +1,6 @@
 import pygame, random
 
-from Snake import Snake
+from Snake import Snake, CollisionException
 from Food import Food
 
 
@@ -52,6 +52,12 @@ class Board:
 
         for snake in self.snakes:
             snake.move()
+
+            for other_snake in self.snakes:
+                if snake.collides(other_snake):
+                    if snake.state != 'dead':
+                        print(f'[{self.frame_nr}] Snake {snake.id} collided in {other_snake.id}')
+                    snake.kill()
             
             for food in self.available_food:
                 if snake.get_pos() == food.get_pos():

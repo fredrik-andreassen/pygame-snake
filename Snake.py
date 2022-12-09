@@ -18,11 +18,13 @@ class Snake:
         self.reset()
     
 
-    def generate_color_pattern(self, color: str = ''):
+    def generate_color_pattern(self, color: str = '') -> None:
         darkest, brightest = 80, 190
         color_pattern = [(i, i, i) for i in range(darkest, brightest)]
         
         if color:
+            if color == 'grey' or color == 'gray':
+                color_pattern = [(120, 120, 120)]
             if color == 'red':
                 color_pattern = [(255, i, i) for i in range(darkest, brightest)]
             if color == 'green':
@@ -35,10 +37,12 @@ class Snake:
                 color_pattern = [(255, i, 255) for i in range(darkest, brightest)]
 
         self.color_pattern = color_pattern + list(reversed(color_pattern))
-        print(self.color_pattern)
         self.color_pattern_len = len(self.color_pattern)
 
 
+    def kill(self) -> None:
+        self.state = 'dead'
+        self.generate_color_pattern('gray')
 
     def reset(self) -> None:
         self.pos_x = int(self.board.surface.get_width() / self.board.step / 2) * self.board.step
@@ -51,6 +55,7 @@ class Snake:
         self.allowed_len = self.board.step
         self.current_len = 1
 
+        self.state = 'alive'
         self.score = 0
     
 
@@ -64,6 +69,10 @@ class Snake:
 
     def get_current_placement(self) -> list[tuple[int, int]]:
         return self.pos_log[-int(self.current_len)-1:]
+    
+
+    def collides(self, other_snake):
+        return self.get_pos() in other_snake.get_current_placement()[:-1]
     
 
     def pass_event(self, event) -> None:
@@ -103,6 +112,9 @@ class Snake:
     
 
     def move(self) -> None:
+        if self.state == 'dead':
+            return
+
         if self.can_change_direction() and self.current_direction != self.requested_direction:
             self.current_direction = self.requested_direction
             print(f'[{self.board.frame_nr}] Snake {self.id} changed direction {self.current_direction}')
