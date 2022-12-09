@@ -55,8 +55,8 @@ class Board:
 
     def draw(self, frame_nr=1):
         '''Tegner alle entiteter på brettet'''
-        for snake in self.snakes:
-            snake.draw()
-
         for food in self.available_food:
             food.draw(frame_nr)
+        
+        for snake in self.snakes:
+            snake.draw()
