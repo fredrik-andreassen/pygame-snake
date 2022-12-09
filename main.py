@@ -4,8 +4,8 @@ import sys
 from Board import Board
 
 
-WIDTH = 1280
-HEIGHT = 720
+WIDTH = 1600
+HEIGHT = 900
 
 if len(sys.argv) >= 2 and sys.argv[1] == 'debug':
     MODE = 'debug'
@@ -15,7 +15,7 @@ if len(sys.argv) >= 2 and sys.argv[1] == 'debug':
         FRAMERATE = 10
 else:
     MODE = 'normal'
-    FRAMERATE = 200
+    FRAMERATE = 170
 
 STEP = 20
 
@@ -28,9 +28,9 @@ def main():
 
     board = Board(main_surface, STEP)
     board.add_snake({pygame.K_UP: 'up', pygame.K_DOWN: 'down', pygame.K_RIGHT: 'right', pygame.K_LEFT: 'left'},
-                    'blue', (STEP * 10, int(HEIGHT / 2)))
+                    'blue', (STEP * 10, STEP * 10))
     board.add_snake({pygame.K_w: 'up', pygame.K_s: 'down', pygame.K_d: 'right', pygame.K_a: 'left'},
-                    'red', (WIDTH - (STEP * 10), int(HEIGHT / 2)))
+                    'red', (WIDTH - (STEP * 10), HEIGHT - (STEP * 10)))
 
     frame_nr = 0
     while True:
