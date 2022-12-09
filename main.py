@@ -32,7 +32,6 @@ def main():
     frame_nr = 0
     while True:
         frame_nr += 1
-        print(f'[{frame_nr}]', end=' ')
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -42,7 +41,7 @@ def main():
                 board.pass_event(event)
             
         
-        board.update()
+        board.update(frame_nr)
         
         main_surface.fill((0, 0, 0))
         board.draw(frame_nr)
@@ -55,7 +54,6 @@ def main():
         
         pygame.display.update()
         clock.tick(FRAMERATE)
-        print()
 
 
 if __name__ == '__main__':

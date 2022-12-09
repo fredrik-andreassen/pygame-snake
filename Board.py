@@ -27,12 +27,12 @@ class Board:
                 attempts += 1
 
         self.available_food.append(Food(self, pos_x, pos_y, (self.step / 2) - 1))
-        print(f'Placed food at ({pos_x}, {pos_y}) in {attempts} attempts')
+        print(f'[{self.frame_nr}] Placed food at ({pos_x}, {pos_y}) in {attempts} attempts')
 
 
     def assess_food(self) -> None:
         if len(self.available_food) < len(self.snakes) + 1:
-            if random.random() < 0.01:
+            if random.random() < 0.005:
                 self.place_food()
     
 
@@ -46,8 +46,10 @@ class Board:
             snake.pass_event(event)
 
 
-    def update(self):
+    def update(self, frame_nr=0):
         '''Oppdaterer alle entiteter på brettet'''
+        self.frame_nr = frame_nr
+
         for snake in self.snakes:
             snake.move()
             
@@ -56,6 +58,7 @@ class Board:
                     snake.score += food.points
                     self.available_food.remove(food)
                     snake.grow()
+                    print(f'[{self.frame_nr}] Snake {snake.id} consumed food at {food.get_pos()}')
         
         self.assess_food()
 
