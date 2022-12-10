@@ -6,11 +6,12 @@ class CollisionException(Exception):
 
 
 class Snake:
-    def __init__(self, board, id: int, key_mapping: dict, color: str, init_pos: tuple[int, int]) -> None:
+    def __init__(self, board, id: int, key_mapping: dict, color: str, init_pos: tuple[int, int], score_pos: tuple[int, int]) -> None:
         self.board = board
         self.id = id
         self.key_mapping = key_mapping
         self.init_pos_x, self.init_pos_y = init_pos
+        self.score_pos = score_pos
 
         self.radius = board.step / 2
 
@@ -20,7 +21,7 @@ class Snake:
     
 
     def generate_color_pattern(self, color: str = '') -> None:
-        darkest, brightest = 80, 190
+        darkest, brightest = 80, 170
         color_pattern = [(i, i, i) for i in range(darkest, brightest)]
         
         if color:

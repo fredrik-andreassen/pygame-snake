@@ -36,9 +36,9 @@ class Board:
                 self.place_food()
     
 
-    def add_snake(self, key_mapping: dict, color: str, init_pos: tuple[int, int]):
+    def add_snake(self, key_mapping: dict, color: str, init_pos: tuple[int, int], score_pos: tuple[int, int]):
         id = len(self.snakes) + 1
-        self.snakes.append(Snake(self, id, key_mapping, color, init_pos))
+        self.snakes.append(Snake(self, id, key_mapping, color, init_pos, score_pos))
     
 
     def pass_event(self, event):
