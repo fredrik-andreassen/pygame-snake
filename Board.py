@@ -15,7 +15,7 @@ class Board:
         self.available_food: list[Food] = []
     
 
-    def place_food(self, pos_x=-1, pos_y=-1):
+    def place_food(self, frame_nr, pos_x=-1, pos_y=-1):
         if pos_x < 0 or pos_y < 0:
             pos_x = random.randrange(self.step, self.surface.get_width(), self.step)
             pos_y = random.randrange(self.step, self.surface.get_height(), self.step)
@@ -26,14 +26,14 @@ class Board:
                 pos_y = random.randrange(self.step, self.surface.get_height(), self.step)
                 attempts += 1
 
-        self.available_food.append(Food(self, pos_x, pos_y, (self.step / 2) - 1))
+        self.available_food.append(Food(self, frame_nr, pos_x, pos_y, (self.step / 2) - 1))
         print(f'[{self.frame_nr}] Placed food at ({pos_x}, {pos_y}) in {attempts} attempts')
 
 
-    def assess_food(self) -> None:
+    def assess_food(self, frame_nr) -> None:
         if len(self.available_food) < len(self.snakes) + 1:
             if random.random() < 0.002:
-                self.place_food()
+                self.place_food(frame_nr)
     
 
     def add_snake(self, key_mapping: dict, color: str, init_pos: tuple[int, int], score_pos: tuple[int, int]):
@@ -66,7 +66,7 @@ class Board:
                     snake.grow()
                     print(f'[{self.frame_nr}] Snake {snake.id} consumed food at {food.get_pos()}')
         
-        self.assess_food()
+        self.assess_food(frame_nr)
 
 
     def draw(self, frame_nr=1):
