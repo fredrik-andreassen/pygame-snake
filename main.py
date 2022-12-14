@@ -1,25 +1,38 @@
 import pygame
 import sys
 
+import utils
+
 from Board import Board
 
 
 WIDTH = 1600
 HEIGHT = 900
-
-MODE = 'normal'
-FRAMERATE = 150
-
-if len(sys.argv) >= 2:
-    if sys.argv[1] == 'debug':
-        MODE = 'debug'
-        try:
-            FRAMERATE = int(sys.argv[2])
-        except:
-            FRAMERATE = 10
-
 STEP = 20
-PLAYER_COUNT = 3
+
+
+'''
+Arguments:
+    --debug [FPS]
+    --players [1-4]
+'''
+args = utils.get_args()
+
+try:
+    FRAMERATE = int(args['debug'])
+    MODE = 'debug'
+    print(f'[INIT] Debug mode with framerate set to {FRAMERATE}')
+except:
+    FRAMERATE = 150
+    MODE = 'normal'
+    print(f'[INIT] Debug request not detected. Using default framerate {FRAMERATE}')
+
+try:
+    PLAYER_COUNT = int(args['players'])
+    print(f'[INIT] Player count set to {PLAYER_COUNT}')
+except:
+    PLAYER_COUNT = 1
+    print(f'[INIT] Player count invalid or not given. Using default count {PLAYER_COUNT}')
 
 
 def show_message(display: pygame.Surface, message: str, color: tuple[int, int, int], position: tuple[int, int], size: int = 40):
