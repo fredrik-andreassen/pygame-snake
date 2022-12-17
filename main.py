@@ -5,18 +5,31 @@ import utils
 
 from Board import Board
 
-
-WIDTH = 1600
-HEIGHT = 900
 STEP = 20
 
 
 '''
 Arguments:
     --debug [FPS]
-    --players [1-4]
+    --players [count: 1-4]
 '''
 args = utils.get_args()
+
+try:
+    WIDTH = int(args['width'])
+    assert not WIDTH % STEP
+    print(f'[INIT] Surface width set to {WIDTH}')
+except:
+    WIDTH = 1600
+    print(f'[INIT] Surface width invalid or not given. Using default surface width {WIDTH}')
+
+try:
+    HEIGHT = int(args['height'])
+    assert not HEIGHT % STEP
+    print(f'[INIT] Surface height set to {HEIGHT}')
+except:
+    HEIGHT = 900
+    print(f'[INIT] Surface width invalid or not given. Using default surface height {HEIGHT}')
 
 try:
     FRAMERATE = int(args['debug'])
