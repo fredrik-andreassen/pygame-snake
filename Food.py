@@ -1,4 +1,4 @@
-import pygame.gfxdraw, math
+import pygame, math
 
 
 class Food:
@@ -19,4 +19,5 @@ class Food:
     def draw(self, frame_nr: int=1) -> None:
         age = frame_nr - self.init_frame_nr
         r = int(self.radius + math.sin(age / 30) * 1.5)
-        pygame.gfxdraw.filled_circle(self.board.surface, self.pos_x, self.pos_y, r-1, self.color)
+        #pygame.draw.circle(self.board.surface, self.pos_x, self.pos_y, r-1, self.color)
+        pygame.draw.circle(self.board.surface, self.color, self.get_pos(), r)
