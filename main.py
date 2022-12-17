@@ -82,10 +82,12 @@ def main():
 
     frame_nr = 0
     frame_render_times = []
+    frame_render_cpu_times = []
 
     while True:
         frame_nr += 1
         frame_start_time = time.time()
+        frame_start_cpu_time = time.process_time()
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -113,10 +115,14 @@ def main():
         pygame.display.update()
 
         frame_render_times.append(time.time() - frame_start_time)
-        if not frame_nr % int(FRAMERATE / 2):
+        frame_render_cpu_times.append(time.process_time() - frame_start_cpu_time)
+
+        if not frame_nr % FRAMERATE:
             mean_frame_render_time = sum(frame_render_times) / len(frame_render_times)
+            mean_frame_render_cpu_time = sum(frame_render_cpu_times) / len(frame_render_cpu_times)
             frame_render_times = []
-            print(f'[{frame_nr}] Mean frame render time {round(mean_frame_render_time * 1000, 2)} ms')
+            frame_render_cpu_times = []
+            print(f'[{frame_nr}] Mean frame time {round(mean_frame_render_time * 1000, 2)} / {round(mean_frame_render_cpu_time * 1000, 2)} ms')
 
         clock.tick(FRAMERATE)
 
