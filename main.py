@@ -1,12 +1,10 @@
 import pygame
-import sys
+import sys, time
 
 import utils
-
 from Board import Board
 
 STEP = 20
-
 
 '''
 Arguments:
@@ -83,8 +81,12 @@ def main():
         board.add_snake(key_mappings[i], colors[i], start_positions[i], score_positions[i])
 
     frame_nr = 0
+    frame_render_times = []
+
     while True:
         frame_nr += 1
+        frame_start_time = time.time()
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 print(f'[{frame_nr}] QUIT event triggered')
@@ -94,7 +96,6 @@ def main():
             if event.type == pygame.KEYDOWN:
                 board.pass_event(event)
             
-        
         board.update(frame_nr)
         
         main_surface.fill((0, 0, 0))
@@ -102,14 +103,21 @@ def main():
 
         if MODE == 'debug':
             for x in range(STEP, WIDTH, STEP):
-                pygame.draw.line(main_surface, (255, 0, 0), (x, 0), (x, HEIGHT))
+                pygame.draw.line(main_surface, (100, 100, 100), (x, 0), (x, HEIGHT))
             for y in range(STEP, HEIGHT, STEP):
-                pygame.draw.line(main_surface, (255, 0, 0), (0, y), (WIDTH, y))
+                pygame.draw.line(main_surface, (100, 100, 100), (0, y), (WIDTH, y))
 
         for snake in board.snakes:
             show_message(main_surface, f'Score: {snake.score}', snake.color_pattern[int(snake.color_pattern_len / 2)], snake.score_pos)
         
         pygame.display.update()
+
+        frame_render_times.append(time.time() - frame_start_time)
+        if not frame_nr % int(FRAMERATE / 2):
+            mean_frame_render_time = sum(frame_render_times) / len(frame_render_times)
+            frame_render_times = []
+            print(f'[{frame_nr}] Mean frame render time {round(mean_frame_render_time * 1000, 2)} ms')
+
         clock.tick(FRAMERATE)
 
 
