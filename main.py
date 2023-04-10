@@ -11,6 +11,7 @@ Arguments:
     --debug [FPS]
     --players [count: 1-4]
 '''
+# TODO: bytt ut all argumenthåndtering med `argparse`
 args = utils.get_args()
 
 try:
