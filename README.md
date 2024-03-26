@@ -17,7 +17,7 @@
 Eksempler:
 
 - `python main.py -w 3840 -h 2160 -p 4` starter spill i 4K med fire spillere.
-- `python main.py -d 10 -w 300 -h 200` starter spill i feilsøkingsmodus med 10 bilder per sekund og 300x400 oppløsning.
+- `python main.py -d 10 -w 300 -h 200` starter spill i feilsøkingsmodus med 10 bilder per sekund og 300x200 oppløsning.
 
 ### Kontroller
 Spiller 1: <kbd>↑</kbd>  <kbd>←</kbd>  <kbd>↓</kbd>  <kbd>→</kbd>
